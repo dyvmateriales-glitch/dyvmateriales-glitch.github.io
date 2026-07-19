@@ -67,7 +67,7 @@
     </script>
     <script type="module">
       const parts = await Promise.all(
-        ["/assets/app.part0", "/assets/app.part1"].map(async (path) => {
+        ["/assets/app.part0?v=3a3e1ec2d3da", "/assets/app.part1?v=3a3e1ec2d3da"].map(async (path) => {
           const response = await fetch(path);
           if (!response.ok) throw new Error(`No se pudo cargar ${path}`);
           return response.text();
