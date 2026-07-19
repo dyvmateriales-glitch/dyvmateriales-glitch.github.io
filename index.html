@@ -67,7 +67,7 @@
     </script>
     <script type="module">
       const parts = await Promise.all(
-        ["/assets/app.part0?v=3a3e1ec2d3da", "/assets/app.part1?v=3a3e1ec2d3da"].map(async (path) => {
+        ["/assets/app.part0?v=388f7c2d7271", "/assets/app.part1?v=388f7c2d7271"].map(async (path) => {
           const response = await fetch(path);
           if (!response.ok) throw new Error(`No se pudo cargar ${path}`);
           return response.text();
@@ -80,7 +80,7 @@
         URL.revokeObjectURL(moduleUrl);
       }
     </script>
-    <link rel="stylesheet" href="/assets/app.css?v=3a3e1ec2d3da">
+    <link rel="stylesheet" href="/assets/app.css?v=388f7c2d7271">
   </head>
   <body>
     <div id="root"></div>
