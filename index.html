@@ -19,7 +19,7 @@
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="D&amp;V Materiales | Todo para tu obra">
   <meta name="twitter:image" content="https://dyvmateriales.netlify.app/images/social-preview.jpg">
-  <link rel="stylesheet" href="/assets/site-v4.css?v=20260803-2245">
+  <link rel="stylesheet" href="/assets/site-v4.css?v=20260804-hero-showroom">
   <script type="application/ld+json">
   {
     "@context":"https://schema.org",
@@ -85,13 +85,42 @@
   </nav>
 
   <main>
-    <section class="hero" aria-labelledby="hero-title">
-      <img class="hero-image" id="hero-image" src="/images/social-preview.jpg" alt="Exterior moderno con pisos y materiales de diseño" fetchpriority="high">
-      <div class="hero-content">
-        <p class="hero-kicker">Colección exterior</p>
-        <h1 id="hero-title">Materiales que transforman espacios, diseñan experiencias.</h1>
-        <p class="hero-copy">Pisos, revestimientos y productos seleccionados para crear ambientes únicos y duraderos.</p>
-        <a class="hero-cta" href="#catalogo">Explorar catálogo</a>
+    <section class="hero hero-carousel" aria-label="Recomendaciones D&V">
+      <article class="hero-slide is-active" data-hero-slide aria-hidden="false">
+        <img class="hero-image" src="/images/hero.webp" alt="Ambiente integrado con pisos y revestimientos en tonos claros" fetchpriority="high">
+        <div class="hero-content">
+          <p class="hero-kicker">Recomendación D&amp;V</p>
+          <h1 id="hero-title">Todo para renovar tus ambientes</h1>
+          <p class="hero-copy">Pisos, revestimientos y terminaciones para combinar cada espacio de tu casa.</p>
+          <a class="hero-cta" href="#catalogo">Ver catálogo</a>
+        </div>
+      </article>
+      <article class="hero-slide" data-hero-slide aria-hidden="true">
+        <img class="hero-image" src="/images/hero-exterior-v2.webp" alt="Sendero exterior con losetas entre césped">
+        <div class="hero-content">
+          <p class="hero-kicker">Ideas para exterior</p>
+          <h2>Diseñá un exterior para disfrutar</h2>
+          <p class="hero-copy">Losetas, pisos rústicos, símil piedra y opciones resistentes para patios y piletas.</p>
+          <a class="hero-cta" href="#catalogo">Explorar exteriores</a>
+        </div>
+      </article>
+      <article class="hero-slide" data-hero-slide aria-hidden="true">
+        <img class="hero-image" src="/images/hero-inodoro-v2.webp" alt="Baño moderno con inodoro inteligente">
+        <div class="hero-content">
+          <p class="hero-kicker">Para tu baño</p>
+          <h2>Funcionalidad y diseño en cada detalle</h2>
+          <p class="hero-copy">Sanitarios, griferías, vanitorys y espejos para armar un baño completo.</p>
+          <a class="hero-cta" href="#catalogo">Ver opciones</a>
+        </div>
+      </article>
+      <div class="hero-controls" aria-label="Cambiar recomendación">
+        <button class="hero-arrow" type="button" data-hero-prev aria-label="Recomendación anterior">&#8592;</button>
+        <div class="hero-dots">
+          <button class="hero-dot is-active" type="button" data-hero-dot="0" aria-label="Ver recomendación 1" aria-current="true"></button>
+          <button class="hero-dot" type="button" data-hero-dot="1" aria-label="Ver recomendación 2"></button>
+          <button class="hero-dot" type="button" data-hero-dot="2" aria-label="Ver recomendación 3"></button>
+        </div>
+        <button class="hero-arrow" type="button" data-hero-next aria-label="Siguiente recomendación">&#8594;</button>
       </div>
     </section>
 
@@ -178,6 +207,22 @@
       </div>
     </section>
 
+    <section class="showroom" id="showroom" aria-labelledby="showroom-title">
+      <div class="showroom-image-wrap">
+        <img class="showroom-image" src="/images/frente-local.webp" alt="Frente del showroom de D&V Materiales en Totoras" loading="lazy">
+      </div>
+      <div class="showroom-content">
+        <p class="section-kicker">Nuestro showroom</p>
+        <h2 id="showroom-title">Conocé materiales, colores y terminaciones en persona</h2>
+        <p>Te esperamos para recorrer las opciones y ayudarte a elegir lo que mejor funciona para tu ambiente y tu obra.</p>
+        <dl class="showroom-data">
+          <div><dt>Dirección</dt><dd>Av. San Martín 826 · Totoras, Santa Fe</dd></div>
+          <div><dt>Horarios</dt><dd>Lunes a viernes de 8 a 16<br>Sábados de 8 a 12</dd></div>
+        </dl>
+        <a class="showroom-cta" href="https://wa.me/5493476606403?text=Hola%2C%20quiero%20consultar%20antes%20de%20visitar%20el%20showroom." target="_blank" rel="noopener noreferrer">Consultar por WhatsApp</a>
+      </div>
+    </section>
+
     <section class="brands" id="marcas">
       <div class="brands-inner">
         <p class="section-kicker">Calidad y variedad</p>
@@ -225,7 +270,7 @@
     </div>
   </div>
 
-  <script src="/assets/site-v4.js?v=20260803-2245" defer></script>
+  <script src="/assets/site-v4.js?v=20260804-hero-showroom" defer></script>
 </body>
 </html>
 <!-- deploy-trigger: netlify-v4-final-20260803-2245 -->
