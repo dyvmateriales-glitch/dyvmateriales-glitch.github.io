@@ -1,11 +1,9 @@
 (() => {
 'use strict';
 const WA='5493476606403', SOURCES=['/assets/app.part0?v=original-20260804c','/assets/app.part1?v=original-20260804c'];
-const FIREBASE_CONFIG={apiKey:'AIzaSyDz3kFtWEdTYbgGzie0eElCHowkRtxo3PI',authDomain:'dyv-materiales.firebaseapp.com',projectId:'dyv-materiales',storageBucket:'dyv-materiales.firebasestorage.app',messagingSenderId:'854367673946',appId:'1:854367673946:web:5859dc463375d071634263',measurementId:'G-WDXNCSG6HQ'};
-try{if(window.firebase&&!window.firebase.apps.length)window.firebase.initializeApp(FIREBASE_CONFIG);window.firebase?.analytics?.();}catch(err){console.debug('No se pudo iniciar Analytics',err);}
 const state={products:[],groups:[],parent:'Todos',child:'Todos',query:'',sort:'featured'};
 const $=(s,r=document)=>r.querySelector(s), $$=(s,r=document)=>[...r.querySelectorAll(s)];
-function track(name,params={}){try{window.firebase?.analytics?.().logEvent(name,params);}catch(err){console.debug('Analytics no disponible',err);}}
+function track(name,params={}){try{window.gtag?.('event',name,params);}catch(err){console.debug('Analytics no disponible',err);}}
 const norm=(v='')=>String(v).normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().trim();
 const esc=(v='')=>String(v).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#039;');
 function decode(v=''){const t=String(v).replace(/\\n|\\r|\\t/g,' ').replace(/\\`/g,'`').replace(/\\"/g,'"').replace(/\\'/g,"'").replace(/\\u([0-9a-f]{4})/gi,(_,h)=>String.fromCharCode(parseInt(h,16))).replace(/\\x([0-9a-f]{2})/gi,(_,h)=>String.fromCharCode(parseInt(h,16))).replace(/\\\//g,'/').replace(/\\\\/g,'\\').replace(/\s+/g,' ').trim();const n=document.createElement('textarea');n.innerHTML=t;return n.value;}
