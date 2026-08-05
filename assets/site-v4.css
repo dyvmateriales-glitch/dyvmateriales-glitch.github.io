@@ -32,3 +32,10 @@
 @media(max-width:980px){.showroom{grid-template-columns:1fr;gap:32px}.showroom-image{min-height:0;aspect-ratio:16/9}.hero-controls{left:34px}}
 @media(max-width:720px){.hero-carousel,.hero-slide{min-height:470px}.hero-slide .hero-content{min-height:470px;padding-bottom:78px}.hero-slide h1,.hero-slide h2{font-size:clamp(39px,11vw,53px)}.hero-controls{left:25px;bottom:20px}.showroom{padding:52px 18px;gap:25px}.showroom-content h2{font-size:37px}.showroom-data div{grid-template-columns:1fr;gap:5px}.showroom-cta{width:100%}}
 @media(prefers-reduced-motion:reduce){.hero-slide{transition:none}}
+
+/* Product detail: keep the full image and the information visible in the viewport. */
+.modal-card{width:min(980px,100%);height:min(680px,calc(100dvh - 48px));max-height:none;overflow:hidden;grid-template-columns:minmax(0,1.15fr) minmax(330px,.85fr)}
+.modal-media{min-height:0;overflow:hidden}
+.modal-image,.modal-media.has-gallery .modal-image{width:100%;height:100%;min-height:0;object-fit:contain}
+.modal-content{min-width:0;min-height:0;overflow:auto}
+@media(max-width:720px){.product-modal{padding:12px}.modal-card{height:calc(100dvh - 24px);grid-template-columns:1fr;grid-template-rows:minmax(210px,42vh) minmax(0,1fr)}.modal-image{aspect-ratio:auto}.modal-media.has-gallery{min-height:0}.modal-content{padding:27px 22px 23px}}
