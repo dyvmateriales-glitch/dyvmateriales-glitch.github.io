@@ -154,7 +154,61 @@ function catalogRoutes() {
       routes.push({ rubro, subrubro, parent, child, sectionLabel });
     }
   }
-  return routes;
+  const bathroomAccessoryRoutes = [
+    { rubro: '000004', subrubro: '000007', sectionLabel: 'Barrales de seguridad' },
+    { rubro: '000004', subrubro: '000012', sectionLabel: 'Duchas y duchadores' },
+    { rubro: '000004', subrubro: '000082', sectionLabel: 'Flexibles' },
+    { rubro: '000004', subrubro: '000011', sectionLabel: 'Juegos de accesorios' },
+    { rubro: '000004', subrubro: '000010', sectionLabel: 'Organizadores' },
+    { rubro: '000004', subrubro: '000009', sectionLabel: 'Rejillas' },
+    { rubro: '000004', subrubro: '000015', sectionLabel: 'Instalación y ventilación' },
+  ];
+
+  for (const route of bathroomAccessoryRoutes) {
+    if (!routes.some(item => item.rubro === route.rubro && item.subrubro === route.subrubro)) {
+      routes.push({ ...route, parent: 'Accesorios para baño', child: route.sectionLabel });
+    }
+  }
+
+  return routes.map(route => {
+    const normalized = { ...route, child: route.sectionLabel };
+    if (route.rubro === '000001') normalized.parent = 'Cerámicos';
+    else if (route.rubro === '000002') {
+      normalized.parent = 'Porcelanatos';
+      normalized.child = route.sectionLabel.replace(/^Porcellanatos/i, 'Porcelanatos');
+      normalized.sectionLabel = normalized.child;
+    } else if (route.rubro === '000011') normalized.parent = 'Pisos SPC Click';
+    else if (route.rubro === '000010') normalized.parent = 'Revestimientos';
+    else if (route.rubro === '000007') normalized.parent = route.subrubro === '000028' ? 'Revestimientos' : 'Terminaciones';
+    else if (route.rubro === '000003') normalized.parent = 'Griferías';
+    else if (route.rubro === '000005') normalized.parent = 'Sanitarios';
+    else if (route.rubro === '000004') normalized.parent = 'Accesorios para baño';
+    else if (route.rubro === '000006') {
+      normalized.parent = ['000024', '000072'].includes(route.subrubro) ? 'Accesorios para baño' : 'Muebles';
+    } else if (route.rubro === '000008') {
+      normalized.parent = 'Productos para obra';
+      if (route.subrubro === '000030') normalized.child = normalized.sectionLabel = 'Pastinas';
+      if (route.subrubro === '000029') normalized.child = normalized.sectionLabel = 'Pegamentos';
+    } else if (route.rubro === '000009') {
+      normalized.parent = route.subrubro === '000031' ? 'Productos para obra' : 'Terminaciones';
+      if (normalized.sectionLabel === 'Terminaciones') normalized.child = normalized.sectionLabel = 'Perfiles y terminaciones';
+      if (normalized.sectionLabel === 'Listellos') normalized.child = normalized.sectionLabel = 'Listelos';
+    }
+    return normalized;
+  });
+}
+
+function includeProduct(product, route) {
+  if (route.rubro !== '000004' || route.subrubro !== '000015') return true;
+  const code = String(product.codigo || '').trim();
+  const constructionCodes = new Set([
+    '2335', '569', '2331', '2333', '1007',
+    '1652', '2619',
+    '4333', '4421',
+    '4027', '4029', '4546', '4547', '4028',
+    '4030', '4229', '4548', '4031', '4032',
+  ]);
+  return constructionCodes.has(code);
 }
 
 async function requestJson(url, attempt = 1) {
@@ -180,18 +234,21 @@ async function fetchRoute(route) {
     const data = await requestJson(`https://revestimientospottier.com.ar/productos/json/?${query}`);
     for (const product of data.productos || []) {
       if (!product.codigo || !product.descri) continue;
+      if (!includeProduct(product, route)) continue;
+      const title = String(product.descri).trim();
+      const isAdhesive = /\b(adhesivo|profix)\b/i.test(title);
       products.push({
         id: `catalog-${String(product.codigo).trim()}`,
-        title: String(product.descri).trim(),
+        title,
         image: product.foto
           ? `https://revestimientospottier.com.ar/fotos/${encodeURIComponent(product.foto).replace(/%2F/gi, '/')}`
           : '',
         brand: String(product.marca || '').trim(),
         description: `Código ${String(product.codigo).trim()} · Unidad: ${String(product.unidad || '').trim()} · Presentación: ${String(product.envase || '').trim()}`,
         code: String(product.codigo).trim(),
-        parent: route.parent,
-        child: route.child,
-        displayCategory: route.sectionLabel,
+        parent: isAdhesive ? 'Productos para obra' : route.parent,
+        child: isAdhesive ? 'Adhesivos' : route.child,
+        displayCategory: isAdhesive ? 'Adhesivos' : route.sectionLabel,
       });
     }
     if (!data.has_more) break;
