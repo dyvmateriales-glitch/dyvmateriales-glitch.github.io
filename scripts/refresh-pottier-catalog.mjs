@@ -188,7 +188,7 @@ function catalogRoutes() {
     } else if (route.rubro === '000008') {
       normalized.parent = 'Productos para obra';
       if (route.subrubro === '000030') normalized.child = normalized.sectionLabel = 'Pastinas';
-      if (route.subrubro === '000029') normalized.child = normalized.sectionLabel = 'Pegamentos';
+      if (route.subrubro === '000029') normalized.child = normalized.sectionLabel = 'Pegamentos y adhesivos';
     } else if (route.rubro === '000009') {
       normalized.parent = route.subrubro === '000031' ? 'Productos para obra' : 'Terminaciones';
       if (normalized.sectionLabel === 'Terminaciones') normalized.child = normalized.sectionLabel = 'Perfiles y terminaciones';
@@ -247,8 +247,8 @@ async function fetchRoute(route) {
         description: `Código ${String(product.codigo).trim()} · Unidad: ${String(product.unidad || '').trim()} · Presentación: ${String(product.envase || '').trim()}`,
         code: String(product.codigo).trim(),
         parent: isAdhesive ? 'Productos para obra' : route.parent,
-        child: isAdhesive ? 'Adhesivos' : route.child,
-        displayCategory: isAdhesive ? 'Adhesivos' : route.sectionLabel,
+        child: isAdhesive ? 'Pegamentos y adhesivos' : route.child,
+        displayCategory: isAdhesive ? 'Pegamentos y adhesivos' : route.sectionLabel,
       });
     }
     if (!data.has_more) break;
