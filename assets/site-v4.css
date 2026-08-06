@@ -43,3 +43,7 @@
 /* El indicador solo ocupa espacio mientras el catálogo se está cargando. */
 .loading-state{display:none}
 .loading-state.is-visible{display:block}
+
+@media (max-width:760px){
+  #results-label{scroll-margin-top:88px}
+}
